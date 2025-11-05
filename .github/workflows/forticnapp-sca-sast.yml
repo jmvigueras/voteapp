@@ -1,4 +1,4 @@
-name: fortidemoscloud - FortiCNAPP SCA, SAST
+name: SCA, SAST scan - fortidemoscloud/voteapp
 
 on:
   push:

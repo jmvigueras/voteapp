@@ -2,6 +2,14 @@ FROM python:3.12-slim
 
 WORKDIR /app
 
+# Intall tools for troubleshooting networking issues
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    netcat-openbsd \
+    iputils-ping \
+    curl \
+    && apt-get clean \
+    && rm -rf /var/lib/apt/lists/*
+
 ENV PYTHONDONTWRITEBYTECODE=1 \
     PYTHONUNBUFFERED=1
 
