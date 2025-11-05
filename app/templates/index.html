@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Voting App</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div class="container py-5">
+        <div class="row justify-content-center">
+            <div class="col-md-8 col-lg-6">
+                <div class="card shadow">
+                    <div class="card-header text-white">
+                        <h1 class="card-title text-center mb-0">Voting App</h1>
+                    </div>
+                    <div class="card-body p-4">
+                        <h3 class="text-center mb-4">{{ question }}</h3>
+                        
+                        <div class="d-flex justify-content-center gap-3 mb-4">
+                            <button id="vote-yes" class="btn btn-success btn-lg" onclick="castVote('yes')">
+                                <i class="bi bi-hand-thumbs-up-fill"></i> Yes
+                            </button>
+                            <button id="vote-no" class="btn btn-danger btn-lg" onclick="castVote('no')">
+                                <i class="bi bi-hand-thumbs-down-fill"></i> No
+                            </button>
+                        </div>
+                        
+                        <div id="message" class="alert" style="display: none;"></div>
+                        
+                        <hr class="my-4">
+                        
+                        <h2 class="text-center mb-4">Results</h2>
+                        
+                        <div class="mb-4">
+                            <div class="d-flex justify-content-between mb-2">
+                                <span class="fw-bold text-success">Yes</span>
+                                <span class="fw-bold text-success"><span id="yes-percentage">0</span>%</span>
+                            </div>
+                            <div class="progress" style="height: 30px;">
+                                <div id="yes-progress" class="progress-bar bg-success" role="progressbar" style="width: 0%" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+                            </div>
+                        </div>
+                        
+                        <div class="mb-4">
+                            <div class="d-flex justify-content-between mb-2">
+                                <span class="fw-bold text-danger">No</span>
+                                <span class="fw-bold text-danger"><span id="no-percentage">0</span>%</span>
+                            </div>
+                            <div class="progress" style="height: 30px;">
+                                <div id="no-progress" class="progress-bar bg-danger" role="progressbar" style="width: 0%" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+                            </div>
+                        </div>
+                        
+                        <div class="row text-center g-3">
+                            <div class="col-md-6">
+                                <div class="card bg-light">
+                                    <div class="card-body">
+                                        <h5 class="text-success">Yes Votes</h5>
+                                        <h2 id="yes-count" class="display-4">0</h2>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="card bg-light">
+                                    <div class="card-body">
+                                        <h5 class="text-danger">No Votes</h5>
+                                        <h2 id="no-count" class="display-4">0</h2>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-footer text-center text-muted">
+                        <small>Made by vibe coder jvigueras</small>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Custom JS -->
+    <script src="{{ url_for('static', filename='js/app.js') }}"></script>
+</body>
+</html>

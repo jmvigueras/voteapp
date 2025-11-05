@@ -1,0 +1,24 @@
+services:
+  web:
+    build: .
+    ports:
+      - "8081:5000"
+    environment:
+      - REDIS_URL=redis://redis:6379/0
+      - VOTE_QUESTION=Do you think cybersecurity is important for your business?
+    depends_on:
+      - redis
+    volumes:
+      - ./app:/app/app
+    restart: always
+
+  redis:
+    image: redis:7-alpine
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    restart: always
+
+volumes:
+  redis_data:
