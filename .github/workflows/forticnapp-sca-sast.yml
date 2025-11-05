@@ -1,0 +1,28 @@
+name: fortidemoscloud - FortiCNAPP SCA, SAST
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+  workflow_dispatch:
+
+env:
+  LW_ACCOUNT_NAME: ${{ secrets.LW_ACCOUNT_NAME }}
+  LW_API_KEY: ${{ secrets.LW_API_KEY }}
+  LW_API_SECRET: ${{ secrets.LW_API_SECRET }}
+  
+jobs:
+  forticnapp-sca-sast:
+    runs-on: ubuntu-24.04
+
+    name: Run analysis
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Analyze
+        uses: lacework/code-security-action@v1
+        with:
+          token: ${{ secrets.GITHUBTOKEN }}
