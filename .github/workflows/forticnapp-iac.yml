@@ -1,11 +1,13 @@
-name: IaC scan - fortidemoscloud/voteapp
+name: IaC:fortidemoscloud/voteapp
 
 on:
   push:
     branches: [ "main" ]
-  pull_request:
-    branches: [ "main" ]
   workflow_dispatch:
+
+concurrency:
+  group: forticnapp-iac-${{ github.ref }}
+  cancel-in-progress: true
 
 jobs:
   forticnapp-iac:

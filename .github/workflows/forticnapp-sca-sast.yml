@@ -1,9 +1,7 @@
-name: SCA, SAST scan - fortidemoscloud/voteapp
+name: SCA-SAST:fortidemoscloud/voteapp
 
 on:
   push:
-    branches: [ "main" ]
-  pull_request:
     branches: [ "main" ]
   workflow_dispatch:
 
@@ -11,6 +9,10 @@ env:
   LW_ACCOUNT_NAME: ${{ secrets.LW_ACCOUNT_NAME }}
   LW_API_KEY: ${{ secrets.LW_API_KEY }}
   LW_API_SECRET: ${{ secrets.LW_API_SECRET }}
+
+concurrency:
+  group: forticnapp-sca-sast-${{ github.ref }}
+  cancel-in-progress: true
   
 jobs:
   forticnapp-sca-sast:
@@ -25,4 +27,4 @@ jobs:
       - name: Analyze
         uses: lacework/code-security-action@v1
         with:
-          token: ${{ secrets.GITHUBTOKEN }}
+          target: push
