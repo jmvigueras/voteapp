@@ -1,7 +1,4 @@
 from flask import Blueprint, render_template, jsonify, request, current_app
-import subprocess
-import hashlib
-import sqlite3
 
 main = Blueprint('main', __name__)
 
@@ -44,31 +41,3 @@ def results():
         'no_percentage': no_percentage
     })
 
-#CWE-78: OS Command Injection
-@main.route('/api/ping')
-def ping_host():
-    host = request.args.get('host', 'localhost')
-    
-    # Vulnerable: Command injection
-    result = subprocess.check_output(f"ping -c 1 {host}", shell=True)
-    return result.decode()
-
-#A2: Broken Authentication
-@main.route('/api/login', methods=['POST'])
-def login():
-    username = request.form['username']
-    password = request.form['password']
-    
-    # Vulnerable: Weak hashing algorithm without salt
-    hashed_password = hashlib.md5(password.encode()).hexdigest()
-    
-    conn = sqlite3.connect('database.db')
-    cursor = conn.cursor()
-    query = f"SELECT * FROM users WHERE username = '{username}' AND password = '{hashed_password}'"
-    cursor.execute(query)
-    user = cursor.fetchone()
-    conn.close()
-    
-    if user:
-        return "Login successful"
-    return "Login failed"
