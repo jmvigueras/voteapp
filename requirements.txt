@@ -2,3 +2,5 @@ Flask==3.0.0
 gunicorn==21.2.0
 redis==5.0.1
 pyyaml==3.13
+SQLAlchemy==1.2.0
+pyyaml==3.13
