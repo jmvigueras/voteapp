@@ -5,7 +5,7 @@ services:
       - "8080:5000"
     environment:
       - REDIS_URL=redis://redis:6379/0
-      - VOTE_QUESTION=Do you think cybersecurity is important for your business?
+      - VOTE_QUESTION=Do you like this app?
     depends_on:
       - redis
     volumes:
@@ -14,8 +14,6 @@ services:
 
   redis:
     image: redis:7-alpine
-    ports:
-      - "6379:6379"
     volumes:
       - redis_data:/data
     restart: always
